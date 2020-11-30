@@ -1,0 +1,181 @@
+$f: (); // fire
+$w: 30; // width
+$h: 16; // height
+$l: 128; // length
+$c: (   // colors
+  #070707,
+  #470F07,
+  #771F07,
+  #8F2707,
+  #AF3F07,
+  #C74707,
+  #DF5707,
+  #D75F07,
+  #D7670F,
+  #CF770F,
+  #CF8717,
+  #C78F17,
+  #BF9F1F,
+  #BFAF2F,
+  #B7B72F,
+  #CFCF6F,
+  #FFFFFF,
+);
+$s: 3.125vmin; // size
+
+// empty $w*$h list 🔥
+@for $x from 1 through $w {
+  @for $y from 1 through $h {
+    $f: append(
+      $f,
+      0,
+    );
+  }
+}
+
+// light the bottom row 🔥
+@for $x from 1 through $w {
+  $f: set-nth(
+    $f,
+    ($h - 1) * $w + $x,
+    16
+  );
+}
+
+// spread the fire upwards
+@function spread($x, $y) {
+  $m: 1;
+  $r: floor(random() * $m);
+  $i: $y * $w + $x;
+  $d: min(
+    max(
+      $i - $r + ($m - 1) - $w,
+      0
+    ),
+    $w * $h - 1,
+  );
+  $n: min(
+    max(
+      nth(
+        $f,
+        $i
+      ) - 1 - floor(random() * 3),
+      0
+    ),
+    $h,
+  );
+  $f: set-nth(
+    $f,
+    $d,
+    $n
+  ) !global;
+  @return $f;
+}
+
+@function tick() {
+  @for $x from 1 through $w - 0 {
+    @for $y from 1 through $h - 1 {
+      $_: spread($x, $y);
+    }
+  }
+  @return $f;
+}
+
+// let it warm up a bit 🔥
+@for $i from 1 through 16 {
+  $_: tick();
+}
+
+@mixin draw {
+  $box-shadow: ();
+  @for $x from 1 through $w - 0 {
+    @for $y from 1 through $h - 2 {
+      $i: nth(
+        $f,
+        $y * $w + $x
+      );
+      $box-shadow: append(
+        $box-shadow,
+        var(--x#{$x})
+        var(--y#{$y})
+        0px
+        nth($c, $i + 1),
+        $separator: comma
+      );
+    }
+  }
+  box-shadow: $box-shadow;
+}
+
+:root {
+  --h: 0;
+  --v: 0;
+
+  @for $x from 1 through $w {
+    --x#{$x}: calc(
+     96.865vmin - #{$x} * #{$s}
+    );
+  }
+  @for $y from 1 through $h {
+    --y#{$y}: calc(
+      0vmin + #{$y} * #{$s}
+    );
+  }
+}
+
+@keyframes fire {
+  @for $i from 0 through $l {
+    #{$i * 100 / $l}% {
+      $_: tick();
+      @include draw;
+    }
+  }
+}
+
+@media (orientation: landscape) {
+  :root {
+    --h: calc(50vw - 50vh);
+  }
+}
+ @media (orientation: portrait) {
+  :root {
+    --v: calc(50vh - 50vw);
+  }
+}
+
+body {
+  background-color: nth($c, 1);
+  border-bottom-width: var(--v);
+  border-left-width: var(--h);
+  border-color: var(--c0);
+  border-right-width: var(--h);
+  border-style: solid;
+  border-top-width: var(--v);
+  box-sizing: border-box;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+body::after {
+  @include draw;
+  animation:
+    8s
+    linear
+    infinite
+    fire;
+  content: "";
+  height: calc(#{$s} * 2.1);
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform-origin: bottom;
+  transform: scaleY(2);
+  width: calc(#{$s} * 1.1);
+  filter:
+    blur(1.2vmin)
+    brightness(1.4)
+    saturate(2);
+}
+

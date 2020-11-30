@@ -1,0 +1,15 @@
+{
+  "name": "@hendotcat/doomfire",
+  "devDependencies": {
+    "@11ty/eleventy": "^0.11.0",
+    "chokidar": "^3.4.3",
+    "dotenv": "^8.2.0",
+    "fs-extra": "^9.0.1",
+    "html-minifier": "^4.0.0",
+    "jsdom": "^16.4.0",
+    "sass": "^1.27.0"
+  },
+  "scripts": {
+    "start": "eleventy --serve"
+  }
+}
