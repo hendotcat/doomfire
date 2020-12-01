@@ -5,11 +5,11 @@ const sass = require("sass")
 const version = require("./_data/version")
 
 function compile() {
-  const target = `_site/style-${version}.css`
+  const target = `_site/doomfire-${version}.css`
   const hrstart = process.hrtime()
-	const result = sass.renderSync({ file: "style.scss" })
+  const result = sass.renderSync({ file: "doomfire.scss" })
   const hrend = process.hrtime()
-  console.log(`✨ style.css ${Math.floor(hrend[1] / 1000000)}ms`)
+  console.log(`✨ doomfire.css ${Math.floor(hrend[1] / 1000000)}ms`)
   fs.ensureDirSync("_site")
   fs.writeFileSync(target, result.css)
 }
@@ -24,7 +24,7 @@ function monkeypatch(cls, fn) {
 }
 
 module.exports = function(eleventyConfig) {
-	compile()
+  compile()
 
   setImmediate(function() {
     let initialized = false
@@ -32,7 +32,7 @@ module.exports = function(eleventyConfig) {
     if (Eleventy.prototype) {
       function watch(original) {
         if (!initialized) {
-          const watcher = chokidar.watch(["style.scss"], {
+          const watcher = chokidar.watch(["doomfire.scss"], {
             persistent: true
           })
           const compileAndReload = eleventyInstance => () => {
@@ -50,7 +50,7 @@ module.exports = function(eleventyConfig) {
   })
 
   eleventyConfig.addPassthroughCopy("images")
-	eleventyConfig.addPassthroughCopy("videos")
+  eleventyConfig.addPassthroughCopy("videos")
 
   eleventyConfig.addTransform(
     "htmlmin",

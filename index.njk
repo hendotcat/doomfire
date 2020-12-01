@@ -453,8 +453,8 @@ description: The fire effect from the PSX version of DOOM, built in pure CSS.
               () => {
                 document.body.dataset.mode = "load"
                 request.open("GET", ({
-                  "hen.cat": `{{ url }}/style-{{ version }}.css`,
-                  "localhost": `style-{{ version }}.css`,
+                  "hen.cat": `{{ url }}/doomfire-{{ version }}.css`,
+                  "localhost": `doomfire-{{ version }}.css`,
                 })[location.hostname])
                 request.send()
               }
