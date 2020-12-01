@@ -118,6 +118,10 @@ description: The fire effect from the PSX version of DOOM, built in pure CSS.
           </svg>
         </button>
 
+        <svg aria-label="loading" viewBox="0 0 256 48" preserveAspectRatio="none">
+          <path d="M0,24 L256,24" />
+        </svg>
+
         <p
           itemprop="creator"
           itemscope
@@ -150,6 +154,7 @@ description: The fire effect from the PSX version of DOOM, built in pure CSS.
 
         --backgroundColor: black;
 
+        --mainAnimation: none;
         --mainWidth: var(--box);
         --mainHeight: var(--box);
 
@@ -157,17 +162,43 @@ description: The fire effect from the PSX version of DOOM, built in pure CSS.
         --playButtonBorder: 2px solid #1d2b53;
         --playButtonBorderRadius: 4px;
         --playButtonBoxShadow: 0 0 4px moccasin;
-        --playButtonHeight: 48px;
-        --playButtonWidth: 108px;
+        --playButtonDisplay: none;
+        --playButtonHeight: 3rem;
+        --playButtonWidth: 6.75rem;
+
+        --loadingBarBackground: var(--playButtonBackground);
+        --loadingBarBorder: var(--playButtonBorder);
+        --loadingBarBorderRadius: var(--playButtonBorderRadius);
+        --loadingBarBoxShadow: var(--playButtonBoxShadow);
+        --loadingBarDisplay: none;
+        --loadingBarHeight: var(--playButtonHeight);
+        --loadingBarTransform: scaleX(1);
+        --loadingBarTransitionDuration: 256ms;
+        --loadingBarWidth: var(--playButtonWidth);
       }
 
       body[data-mode="menu"] {
+        --playButtonDisplay: flex;
       }
 
       body[data-mode="load"] {
+        --loadingBarDisplay: flex;
+        --loadingBarWidth: var(--box);
       }
 
       body[data-mode="play"] {
+        --loadingBarDisplay: flex;
+        --loadingBarWidth: var(--box);
+      }
+
+      body[data-mode="play"] {
+        --mainAnimation: explode 128ms forwards;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        :root {
+          --loadingBarTransform: scaleX(0.55);
+        }
       }
 
       html {
@@ -192,7 +223,19 @@ description: The fire effect from the PSX version of DOOM, built in pure CSS.
         width: 100vw;
       }
 
+      @keyframes explode {
+        from {
+          opacity: 1;
+          transform: scale(1.0);
+        }
+        to {
+          opacity: 0;
+          transform: scale(1.08);
+        }
+      }
+
       main {
+        animation: var(--mainAnimation);
         height: var(--mainHeight);
         width: var(--mainWidth);
 
@@ -220,14 +263,13 @@ description: The fire effect from the PSX version of DOOM, built in pure CSS.
         border: var(--playButtonBorder);
         border-radius: var(--playButtonBorderRadius);
         box-shadow: var(--playButtonBoxShadow);
+        display: var(--playButtonDisplay);
         height: var(--playButtonHeight);
         width: var(--playButtonWidth);
 
-        display: flex;
         align-items: center;
         cursor: pointer;
         justify-content: center;
-        margin-top: 2rem;
       }
 
       [aria-label="play"] svg:nth-child(1) {
@@ -252,6 +294,39 @@ description: The fire effect from the PSX version of DOOM, built in pure CSS.
         display: block;
         width: 64px;
         height: 32px;
+      }
+
+      @keyframes resize {
+        from {
+          background-color: var(--playButtonBackground);
+          transform: var(--loadingBarTransform);
+        }
+        to {
+          background-color: transparent;
+          transform: scaleX(1);
+        }
+      }
+
+      [aria-label="loading"] {
+        background-color: var(--loadingBarBorder);
+        border: var(--loadingBarBorder);
+        box-shadow: var(--loadingBarBoxShadow);
+        display: var(--loadingBarDisplay);
+        height: var(--loadingBarHeight);
+        transform: var(--loadingBarTransform);
+        width: var(--loadingBarWidth);
+
+        animation: resize 128ms forwards ease-in-out;
+        padding: 0 0.4rem;
+        transform-origin: left;
+      }
+
+      [aria-label="loading"] path {
+        stroke: indianred;
+        stroke-width: 32;
+        stroke-dasharray: 256;
+        stroke-dashoffset: 256;
+        transition: stroke-dashoffset var(--loadingBarTransitionDuration) linear;
       }
 
       [itemprop="creator"] {
@@ -301,16 +376,33 @@ description: The fire effect from the PSX version of DOOM, built in pure CSS.
           const request = new XMLHttpRequest
           const body = document.createElement("body")
           const style = document.createElement("style")
+          const loading = document.querySelector("[aria-label='loading'] path")
+          let before = Date.now()
 
           body.appendChild(style)
 
+          request.onloadstart = function(event) {
+            before = Date.now()
+          }
+
           request.onprogress = function(event) {
-            console.log(event.loaded / event.total)
+            const after = Date.now()
+            document.documentElement.style.setProperty(
+              "--loadingBarTransitionDuration",
+              `${(after - before) * 2}ms`
+            )
+            loading.style.strokeDashoffset = 256 - (
+              256 * event.loaded / event.total
+            )
+            before = after
           }
 
           request.onload = function() {
+            document.body.dataset.mode = "play"
             style.innerText = request.response
-            document.body.replaceWith(body)
+            setTimeout(() => {
+              document.body.replaceWith(body)
+            }, 128)
           }
 
           document
@@ -318,14 +410,12 @@ description: The fire effect from the PSX version of DOOM, built in pure CSS.
             .addEventListener(
               "click",
               function() {
+                document.body.dataset.mode = "load"
                 request.open("GET", ({
                   "hen.cat": `{{ url }}/style-{{ version }}.css`,
                   "localhost": `style-{{ version }}.css`,
                 })[location.hostname])
-
                 request.send()
-
-                console.log("click")
               }
             )
         }
