@@ -118,6 +118,16 @@ description: The fire effect from the PSX version of DOOM, built in pure CSS.
           </svg>
         </button>
 
+        <p
+          itemprop="creator"
+          itemscope
+          itemtype="http://schema.org/Person">
+          <span>by</span>
+          <a href="https://hen.cat/" target="_blank">
+            <span itemprop="name">Henry Catalini Smith</span>
+          </a>
+        </p>
+
       </article>
     </main>
 
@@ -208,6 +218,7 @@ description: The fire effect from the PSX version of DOOM, built in pure CSS.
         align-items: center;
         cursor: pointer;
         justify-content: center;
+        margin-top: 2rem;
       }
 
       [aria-label="play"] svg:nth-child(1) {
@@ -232,6 +243,39 @@ description: The fire effect from the PSX version of DOOM, built in pure CSS.
         display: block;
         width: 64px;
         height: 32px;
+      }
+
+      [itemprop="creator"] {
+        align-items: center;
+        color: white;
+        display: flex;
+        font-family: Futura, Helvetica, sans-serif;
+        grid-template-columns: repeat(2, auto);
+        margin: 2rem 0 0 0;
+        transition: opacity 256ms 512ms;
+      }
+
+      [itemprop="creator"] > span {
+        color: lightgray;
+        font-style: italic;
+      }
+
+      [itemprop="creator"] > span::after {
+        content: "  ";
+        white-space: pre;
+      }
+
+      [itemprop="creator"] a {
+        text-decoration: none;
+      }
+
+      [itemprop="creator"] [itemprop="name"] {
+        color: white;
+        font-size: 1.4rem;
+      }
+
+      [itemprop="creator"] [itemprop="name"]:hover {
+        text-decoration: underline cyan;
       }
 
     </style>
