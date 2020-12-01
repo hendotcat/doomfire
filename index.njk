@@ -1,3 +1,8 @@
+---
+name: doomfire
+url: https://hen.cat/doomfire
+description: The fire effect from the PSX version of DOOM, built in pure CSS.
+---
 <!doctype html>
 <html
   lang="en"
@@ -5,12 +10,87 @@
   itemscope
   itemtype="http://schema.org/WebApplication">
   <head>
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="{{ url }}/images/icon-180x180.png"
+    />
+
+    <link
+      rel="canonical"
+      href="{{ url }}"
+    />
+
+    <link
+      rel="icon"
+      sizes="16x16"
+      href="{{ url }}/images/icon-16x16.png"
+    />
+
+    <link
+      rel="icon"
+      sizes="32x32"
+      href="{{ url }}/images/icon-32x32.png"
+    />
+
     <meta
       name="viewport"
       content="width=device-width,initial-scale=1"
     />
+
+    <meta
+      name="description"
+      content="{{ description }}"
+    />
+
+    <meta
+      name="theme-color"
+      content="#000000"
+    />
+
+    <meta
+      property="og:description"
+      content="{{ description }}"
+    />
+
+    <meta
+      property="og:title"
+      content="{{ name }}"
+    />
+
+    <meta
+      property="og:url"
+      content="{{ url }}"
+    />
+
+    <meta
+      name="twitter:card"
+      content="summary_large_image"
+    />
+
+    <meta
+      name="twitter:text:title"
+      content="{{ name }}"
+    />
+
+    <meta
+      property="twitter:description"
+      content="{{ description }}"
+    />
+
+    <meta
+      name="twitter:creator"
+      content="@hendotcat"
+    />
+
+    <meta
+      name="twitter:website"
+      content="@hendotcat"
+    />
+
     <title>
-      doomfire
+      {{ name }}
     </title>
   </head>
   <body data-mode="menu">
@@ -19,12 +99,12 @@
       <article>
         <header>
           <h1 itemprop="headline name">
-            doomfire
+            {{ name }}
           </h1>
         </header>
 
         <p itemprop="description">
-          The fire effect from the PSX version of DOOM, built in pure CSS.
+          {{ description }}
         </p>
 
         <button aria-label="play">
@@ -182,7 +262,7 @@
               "click",
               function() {
                 request.open("GET", ({
-                  "hen.cat": `https://hen.cat/doomfire/style-{{ version }}.css`,
+                  "hen.cat": `{{ url }}/style-{{ version }}.css`,
                   "localhost": `style-{{ version }}.css`,
                 })[location.hostname])
 

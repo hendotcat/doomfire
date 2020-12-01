@@ -10,6 +10,7 @@
     "sass": "^1.27.0"
   },
   "scripts": {
+    "build": "eleventy",
     "start": "eleventy --serve"
   }
 }
