@@ -1,7 +1,7 @@
 $f: (); // fire
 $w: 30; // width
 $h: 16; // height
-$l: 128; // length
+$l: 256; // length
 $c: (   // colors
   #070707,
   #470F07,
@@ -161,7 +161,7 @@ body {
 body::after {
   @include draw;
   animation:
-    8s
+    16s
     linear
     infinite
     fire;
