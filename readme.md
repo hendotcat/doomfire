@@ -1,12 +1,12 @@
 doomfire
 ========
 
-The fire effect from the PSX version of DOOM, built in pure CSS.
+Fire animation in pure CSS inspired by the PlayStation version of DOOM.
 
 ![Video of the fire with red flames against a black background. The bottom of the flames near the source is yellow](https://hen.cat/doomfire/videos/demo-512x512.gif)
 
-How it works
-------------
+About
+-----
 
 The algorithm for the fire itself is from Fabien Sanglard's [How DOOM fire was
 done]. Fabien's write-up was so helpful that it inspired me to try and pay it
@@ -133,6 +133,15 @@ real flames is thanks to CSS. While the example code above uses a square pseudo
 element, the real animation uses a long thin one. This stretches the flames out
 a bit vertically, without changing anything about the algorithm powering it.
 Combined with the blur filter, I think it produces a pretty neat effect!
+
+License
+-------
+
+[![License: CC0-1.0](https://licensebuttons.net/l/zero/1.0/80x15.png)](http://creativecommons.org/publicdomain/zero/1.0/)
+
+Hope somebody finds something in here that they find useful or inspiring.
+Copy as much as you want.
+By reading this sentence you are hereby double dog dared to ship this in a user-facing production site.
 
 [How DOOM fire was done]: https://fabiensanglard.net/doom_fire_psx/
 
