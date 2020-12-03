@@ -6,7 +6,7 @@ Fire animation in pure CSS inspired by the PlayStation version of DOOM.
 |    |                                                     |
 |----|-----------------------------------------------------|
 | ▶️  | [play it](https://hen.cat/doomfire)                 |
-| 😳 | [look at the source code](blob/trunk/doomfire.scss) |
+| 😳 | [look at the source code](https://github.com/hendotcat/doomfire/blob/trunk/doomfire.scss) |
 
 ![Video of the fire with red flames against a black background. The bottom of the flames near the source is yellow](https://hen.cat/doomfire/videos/demo-512x512.gif)
 
