@@ -22,7 +22,7 @@
     "opengraph-1200x630.png"
   ],
   "dependencies": {
-    "@hendotcat/zoetrope": "^0.0.1"
+    "@hendotcat/zoetrope": "latest"
   },
   "scripts": {
     "build": "zoetrope",
