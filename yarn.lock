@@ -46,9 +46,9 @@
     valid-url "^1.0.9"
 
 "@hendotcat/zoetrope@latest":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@hendotcat/zoetrope/-/zoetrope-0.0.3.tgz#e19894d23648dbf972b7ad7eef3e6c9c63312f60"
-  integrity sha512-MKpVSPTt1tgJHh6mLIPqxWR+tg/A5W2Kn5AYawjTevZARy000erETcVpbQcEHF4cZmUCHpvNgEBQvz27sUK56A==
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@hendotcat/zoetrope/-/zoetrope-0.0.4.tgz#ae3fc37b3c2f16ba6f338c22f021875dd3252a31"
+  integrity sha512-pkzvwymV3WbbtkPkS+vTD+tc0RhO49IluhLJgbXT3nQD9SX9BYkno6C41mG7455s4jjSseyXbpkxl2LptX1t2A==
   dependencies:
     "@11ty/eleventy" "^0.11.1"
     chokidar "^3.5.1"
