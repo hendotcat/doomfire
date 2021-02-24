@@ -1,16 +1,31 @@
 {
   "name": "@hendotcat/doomfire",
-  "devDependencies": {
-    "@11ty/eleventy": "^0.11.0",
-    "chokidar": "^3.4.3",
-    "dotenv": "^8.2.0",
-    "fs-extra": "^9.0.1",
-    "html-minifier": "^4.0.0",
-    "jsdom": "^16.4.0",
-    "sass": "^1.27.0"
+  "main": "doomfire.scss",
+  "homepage": "https://hen.cat/doomfire/",
+  "description": "Fire animation in pure CSS inspired by the PlayStation version of DOOM",
+  "license": "CC0-1.0",
+  "author": {
+    "name": "Henry Catalini Smith",
+    "email": "hen@hey.com",
+    "url": "https://hen.cat/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hendotcat/doomfire.git"
+  },
+  "files": [
+    "demo-512x512.gif",
+    "demo-512x512.mp4",
+    "example-output-1-256x256.png",
+    "example-output-2-256x256.png",
+    "example-output-3-256x256.gif",
+    "opengraph-1200x630.png"
+  ],
+  "dependencies": {
+    "@hendotcat/zoetrope": "^0.0.1"
   },
   "scripts": {
-    "build": "eleventy",
-    "start": "eleventy --serve"
+    "build": "zoetrope",
+    "start": "zoetrope --serve"
   }
 }

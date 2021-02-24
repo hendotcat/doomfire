@@ -42,7 +42,7 @@ visible.
       <td>
         <img
           alt="A single black square in the top right corner."
-          src="https://hen.cat/doomfire/images/example-output-1-256x256.png"
+          src="https://hen.cat/doomfire/example-output-1-256x256.png"
         />
       </td>
     </tr>
@@ -78,7 +78,7 @@ resolution from 1x1 to 1x2.
       <td>
         <img
           alt="A yellow square in the top right and a red square in the bottom right."
-          src="https://hen.cat/doomfire/images/example-output-2-256x256.png"
+          src="https://hen.cat/doomfire/example-output-2-256x256.png"
         />
       </td>
     </tr>
@@ -113,7 +113,7 @@ And making them update to look like a fire is a plain old keyframe animation.
       <td>
         <img
           alt="Animation showing a blank screen, then a red square, then a red square and a yellow square."
-          src="https://hen.cat/doomfire/videos/example-output-3-256x256.gif"
+          src="https://hen.cat/doomfire/example-output-3-256x256.gif"
         />
       </td>
     </tr>
