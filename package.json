@@ -19,7 +19,7 @@
     "example-output-1-256x256.png",
     "example-output-2-256x256.png",
     "example-output-3-256x256.gif",
-    "opengraph-1200x630.png"
+    "opengraph-1200x630.jpg"
   ],
   "dependencies": {
     "@hendotcat/zoetrope": "latest"
