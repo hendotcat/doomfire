@@ -25,7 +25,7 @@
     "@hendotcat/zoetrope": "latest"
   },
   "scripts": {
-    "build": "zoetrope",
-    "start": "zoetrope --serve"
+    "build": "zoetrope build",
+    "start": "zoetrope server"
   }
 }
